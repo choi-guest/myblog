@@ -145,6 +145,27 @@ a {
   text-decoration: none;
 }
 
+.site-nav {
+  margin-left: auto;
+  margin-right: 4px;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
 .theme-toggle {
   display: inline-flex;
   align-items: center;
