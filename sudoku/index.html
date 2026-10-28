@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="휴대폰에서 바로 하는 스도쿠">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="스도쿠">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+  <title>스도쿠</title>
+  <script>
+    // 화면을 그리기 전에 저장된 테마를 적용해 깜빡임을 막는다
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || saved === 'light') document.documentElement.dataset.theme = saved;
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="sudoku.css">
+  <script type="module" src="../js/theme.js"></script>
+  <script type="module" src="sudoku.js"></script>
+</head>
+<body class="sudoku-page">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="site-title" href="../index.html">My Blog</a>
+      <button class="theme-toggle" type="button" aria-label="테마 전환">
+        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content" class="container sudoku">
+    <h1 class="visually-hidden">스도쿠</h1>
+
+    <nav class="difficulty" aria-label="난이도">
+      <button class="chip" type="button" data-difficulty="easy">쉬움</button>
+      <button class="chip" type="button" data-difficulty="medium">보통</button>
+      <button class="chip" type="button" data-difficulty="hard">어려움</button>
+    </nav>
+
+    <div class="game-status">
+      <span>실수 <strong data-mistakes>0</strong></span>
+      <span class="timer">
+        <time data-timer>00:00</time>
+        <button class="icon-button" type="button" data-pause aria-label="일시정지">
+          <svg class="icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          <svg class="icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+        </button>
+      </span>
+    </div>
+
+    <div class="board-wrap">
+      <div class="board" data-board aria-label="스도쿠 판"></div>
+      <div class="board-overlay" data-overlay hidden>
+        <p class="overlay-title" data-overlay-title></p>
+        <p class="overlay-text" data-overlay-text></p>
+        <button class="action-button primary" type="button" data-overlay-action></button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="numpad" data-numpad>
+        <button type="button" data-digit="1">1</button>
+        <button type="button" data-digit="2">2</button>
+        <button type="button" data-digit="3">3</button>
+        <button type="button" data-digit="4">4</button>
+        <button type="button" data-digit="5">5</button>
+        <button type="button" data-digit="6">6</button>
+        <button type="button" data-digit="7">7</button>
+        <button type="button" data-digit="8">8</button>
+        <button type="button" data-digit="9">9</button>
+        <button type="button" data-erase aria-label="지우기">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1z"/><path d="M17 9l-6 6M11 9l6 6"/></svg>
+        </button>
+      </div>
+      <div class="actions">
+        <button class="action-button" type="button" data-undo>되돌리기</button>
+        <button class="action-button" type="button" data-new>새 게임</button>
+      </div>
+    </div>
+
+    <p class="visually-hidden" aria-live="polite" data-announce></p>
+  </main>
+</body>
+</html>

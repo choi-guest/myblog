@@ -1,0 +1,354 @@
+/* ========== 스도쿠 테마 변수 ========== */
+
+:root {
+  --cell-bg: var(--bg);
+  --cell-related: #eef2f7;
+  --cell-same: #dce8f8;
+  --cell-selected: #d3e4fa;
+  --cell-error: #fdecea;
+  --error: #c62828;
+  --grid-line: #d5dae0;
+  --grid-strong: #6e7781;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cell-related: #1a1f27;
+    --cell-same: #1b2c44;
+    --cell-selected: #1f3a5f;
+    --cell-error: #3a1d1f;
+    --error: #ff7b72;
+    --grid-line: #2c323b;
+    --grid-strong: #8b949e;
+  }
+}
+
+:root[data-theme="dark"] {
+  --cell-related: #1a1f27;
+  --cell-same: #1b2c44;
+  --cell-selected: #1f3a5f;
+  --cell-error: #3a1d1f;
+  --error: #ff7b72;
+  --grid-line: #2c323b;
+  --grid-strong: #8b949e;
+}
+
+/* ========== 페이지 ========== */
+
+.sudoku-page {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 홈 화면 앱으로 열면 상태 표시줄 아래로 내린다 */
+.sudoku-page .site-header {
+  padding-top: env(safe-area-inset-top);
+}
+
+.sudoku-page .header-inner {
+  min-height: 52px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.sudoku {
+  --board-size: min(100%, 480px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-block: 12px 20px;
+}
+
+.sudoku button {
+  font: inherit;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.sudoku > * {
+  width: var(--board-size);
+}
+
+/* ========== 난이도 · 상태 ========== */
+
+.difficulty {
+  display: flex;
+  gap: 8px;
+}
+
+.difficulty .chip {
+  flex: 1;
+  justify-content: center;
+  min-height: 44px;
+  background: transparent;
+}
+
+.difficulty .chip[aria-pressed="true"] {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+
+.game-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.game-status strong {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.game-status.has-mistakes strong {
+  color: var(--error);
+}
+
+.timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: -10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.icon-button:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.icon-play,
+.is-paused .icon-pause {
+  display: none;
+}
+
+.is-paused .icon-play {
+  display: block;
+}
+
+/* ========== 판 ========== */
+
+.board-wrap {
+  position: relative;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  aspect-ratio: 1;
+  border: 2px solid var(--grid-strong);
+  border-radius: 6px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-right: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--grid-line);
+  border-radius: 0;
+  background: var(--cell-bg);
+  color: var(--accent);
+  font-size: min(6.4vw, 28px);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.cell:nth-child(9n) {
+  border-right: 0;
+}
+
+.cell:nth-child(n + 73) {
+  border-bottom: 0;
+}
+
+.cell.box-right {
+  border-right: 2px solid var(--grid-strong);
+}
+
+.cell.box-bottom {
+  border-bottom: 2px solid var(--grid-strong);
+}
+
+.cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 0;
+}
+
+.cell.is-given {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.cell.is-related {
+  background: var(--cell-related);
+}
+
+.cell.is-same {
+  background: var(--cell-same);
+}
+
+.cell.is-selected {
+  background: var(--cell-selected);
+}
+
+.cell.is-error {
+  background: var(--cell-error);
+  color: var(--error);
+}
+
+.board.is-hidden .cell {
+  background: var(--cell-bg);
+  color: transparent;
+}
+
+.board-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 24px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  text-align: center;
+}
+
+.board-overlay[hidden] {
+  display: none;
+}
+
+.overlay-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.overlay-text {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+}
+
+/* ========== 숫자 패드 · 버튼 ========== */
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.numpad button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.numpad button:disabled {
+  color: var(--text-muted);
+  opacity: 0.4;
+  cursor: default;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.action-button {
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.action-button:disabled {
+  color: var(--text-muted);
+  opacity: 0.5;
+  cursor: default;
+}
+
+.action-button.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+@media (hover: hover) {
+  .numpad button:not(:disabled):hover,
+  .action-button:not(:disabled):not(.primary):hover {
+    border-color: var(--text-muted);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cell,
+  .numpad button,
+  .action-button,
+  .icon-button {
+    transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+  }
+}
+
+@media (min-width: 768px) {
+  .sudoku {
+    gap: 16px;
+    padding-block: 24px 40px;
+  }
+
+  .cell {
+    font-size: 28px;
+  }
+}
