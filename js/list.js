@@ -1,7 +1,6 @@
 import { loadManifest, formatDate, toTags, tagHref, postHref, el, tagList, notice } from './common.js';
 
 const filterEl = document.querySelector('[data-tag-filter]');
-const filterSection = filterEl.closest('[data-tag-section]') || filterEl;
 const listEl = document.querySelector('[data-post-list]');
 const siteTitle = document.title;
 let posts = [];
@@ -23,7 +22,7 @@ function renderFilter(active) {
 
   const sorted = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'));
   filterEl.replaceChildren(chip('전체', null, posts.length), ...sorted.map(([tag, count]) => chip(`#${tag}`, tag, count)));
-  filterSection.hidden = counts.size === 0;
+  filterEl.hidden = counts.size === 0;
 }
 
 function postItem(post) {
@@ -65,6 +64,6 @@ try {
   render();
 } catch (err) {
   console.error(err);
-  filterSection.hidden = true;
+  filterEl.hidden = true;
   listEl.replaceChildren(el('li', {}, notice('글 목록을 불러오지 못했습니다.')));
 }
