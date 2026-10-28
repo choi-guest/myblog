@@ -3,45 +3,25 @@ import { splitFrontmatter } from './frontmatter.js';
 import { loadManifest, formatDate, toTags, postHref, el, tagList, notice } from './common.js';
 
 const root = document.querySelector('[data-post]');
-const sideToc = document.querySelector('[data-side-toc]');
 const siteTitle = document.title;
+const wide = window.matchMedia('(min-width: 768px)');
 
 const backLink = () => el('p', { class: 'back-link' }, el('a', { href: 'index.html', text: '← 글 목록으로' }));
 
 // 한국어 기준 분당 약 500자
 const readingMinutes = (text) => Math.max(1, Math.round(text.replace(/\s+/g, '').length / 500));
 
-const tocList = (items) => el('ol', {}, items.map((h) => el('li', { class: `toc-h${h.level}` },
-  el('a', { href: `#${encodeURIComponent(h.id)}`, 'data-id': h.id, text: h.text }))));
-
-// 목차는 넓은 화면에서는 사이드바에, 좁은 화면에서는 본문 위 접이식으로 보인다 (CSS가 하나만 보여 준다)
 function toc(headings) {
   const items = headings.filter((h) => h.level === 2 || h.level === 3);
   if (items.length < 3) return null;
 
-  sideToc?.replaceChildren(
-    el('p', { class: 'side-label', text: '목차' }),
-    el('nav', { 'aria-label': '목차' }, tocList(items)));
-  sideToc?.removeAttribute('hidden');
-
-  return el('details', { class: 'toc' },
+  const details = el('details', { class: 'toc' },
     el('summary', { text: '목차' }),
-    el('nav', { 'aria-label': '목차' }, tocList(items)));
-}
-
-// 스크롤 위치에 맞춰 사이드바 목차의 현재 항목을 표시한다
-function trackActiveHeading(prose) {
-  const links = new Map([...(sideToc?.querySelectorAll('a[data-id]') || [])].map((a) => [a.dataset.id, a]));
-  if (!links.size) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      links.forEach((a) => a.removeAttribute('aria-current'));
-      links.get(entry.target.id)?.setAttribute('aria-current', 'true');
-    }
-  }, { rootMargin: '0px 0px -70% 0px' });
-  prose.querySelectorAll('h2[id], h3[id]').forEach((h) => observer.observe(h));
+    el('nav', { 'aria-label': '목차' },
+      el('ol', {}, items.map((h) => el('li', { class: `toc-h${h.level}` },
+        el('a', { href: `#${encodeURIComponent(h.id)}`, text: h.text }))))));
+  details.open = wide.matches;
+  return details;
 }
 
 // 목록은 최신순이므로 다음 칸이 더 오래된 글이다.
@@ -82,7 +62,6 @@ function render(info, body, posts) {
     prose,
     postNav(info.slug, posts),
     backLink());
-  trackActiveHeading(prose);
 
   // 본문이 비동기로 그려졌으므로 주소의 #앵커 위치로 직접 이동한다
   if (location.hash) {

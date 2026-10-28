@@ -7,10 +7,10 @@ export async function loadManifest() {
   return posts.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
 }
 
-// "2026-10-27" → "2026.10.27". Date로 파싱하면 시간대에 따라 하루가 밀릴 수 있어 직접 나눈다.
+// "2026-10-27" → "2026년 10월 27일". Date로 파싱하면 시간대에 따라 하루가 밀릴 수 있어 직접 나눈다.
 export function formatDate(value) {
   const m = String(value ?? '').match(/^(\d{4})-(\d{2})-(\d{2})/);
-  return m ? `${m[1]}.${m[2]}.${m[3]}` : String(value ?? '');
+  return m ? `${m[1]}년 ${Number(m[2])}월 ${Number(m[3])}일` : String(value ?? '');
 }
 
 export function toTags(value) {
