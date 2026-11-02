@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 640" width="360" height="640" role="img" aria-label="도형 모양 적 편대를 향해 탄을 쏘는 전투기">
+  <title>도형 모양 적 편대를 향해 탄을 쏘는 전투기</title>
+  <rect width="360" height="640" fill="#0a1030"/>
+  <g fill="#56649a">
+    <rect x="24" y="40" width="1.5" height="1.5"/><rect x="92" y="118" width="1.5" height="1.5"/>
+    <rect x="300" y="64" width="1.5" height="1.5"/><rect x="330" y="210" width="1.5" height="1.5"/>
+    <rect x="48" y="300" width="1.5" height="1.5"/><rect x="210" y="360" width="1.5" height="1.5"/>
+    <rect x="120" y="440" width="1.5" height="1.5"/><rect x="286" y="480" width="1.5" height="1.5"/>
+    <rect x="30" y="560" width="1.5" height="1.5"/><rect x="250" y="600" width="1.5" height="1.5"/>
+  </g>
+  <g fill="#c9d4ff">
+    <rect x="160" y="30" width="2.4" height="2.4"/><rect x="60" y="190" width="2.4" height="2.4"/>
+    <rect x="318" y="330" width="2.4" height="2.4"/><rect x="80" y="520" width="2.4" height="2.4"/>
+    <rect x="270" y="410" width="2.4" height="2.4"/>
+  </g>
+  <circle cx="180" cy="170" r="90" fill="none" stroke="#56649a" stroke-width="1" stroke-dasharray="4 6" opacity="0.6"/>
+  <g stroke="#0a1030" stroke-width="1.5">
+    <polygon points="180,90 171,75 189,75" fill="#ff8a80"/>
+    <rect x="243" y="105" width="22" height="22" fill="#c4a8ff"/>
+    <rect x="241" y="125" width="26" height="5" fill="#0a1030"/>
+    <polygon points="284,170 277,182 263,182 256,170 263,158 277,158" fill="#6ee7b7"/>
+    <polygon points="244,240 235,225 253,225" fill="#ff8a80"/>
+    <rect x="169" y="249" width="22" height="22" fill="#c4a8ff"/>
+    <rect x="167" y="269" width="26" height="5" fill="#0a1030"/>
+    <polygon points="116,240 107,225 125,225" fill="#ff8a80"/>
+    <polygon points="104,170 97,182 83,182 76,170 83,158 97,158" fill="#6ee7b7"/>
+    <polygon points="116,124 107,109 125,109" fill="#ff8a80"/>
+  </g>
+  <g fill="#ffa94d" stroke="#ffffff" stroke-width="1.5">
+    <circle cx="244" cy="300" r="4"/>
+    <circle cx="140" cy="350" r="4"/>
+  </g>
+  <g fill="#a5f3ff">
+    <rect x="173" y="330" width="3" height="12"/><rect x="184" y="330" width="3" height="12"/>
+    <rect x="173" y="390" width="3" height="12"/><rect x="184" y="390" width="3" height="12"/>
+    <rect x="173" y="450" width="3" height="12"/><rect x="184" y="450" width="3" height="12"/>
+    <rect x="173" y="505" width="3" height="12"/><rect x="184" y="505" width="3" height="12"/>
+  </g>
+  <g transform="translate(180 560) scale(1.6)">
+    <ellipse cx="-10" cy="4" rx="7" ry="3.6" transform="rotate(-31.5 -10 4)" fill="#8fd3ff"/>
+    <ellipse cx="10" cy="4" rx="7" ry="3.6" transform="rotate(31.5 10 4)" fill="#8fd3ff"/>
+    <path d="M0 -16 Q4 -6 8 7 Q4 10 0 6 Q-4 10 -8 7 Q-4 -6 0 -16 Z" fill="#8fd3ff"/>
+    <circle cx="0" cy="11" r="2.4" fill="#a5f3ff"/>
+    <circle cx="0" cy="0" r="2" fill="#0a1030"/>
+  </g>
+</svg>
