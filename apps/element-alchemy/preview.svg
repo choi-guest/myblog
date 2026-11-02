@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320" role="img" aria-labelledby="t">
+  <title id="t">원소 타일이 놓인 5×5 연금술 게임판</title>
+  <rect width="320" height="320" rx="16" fill="#4a3b2a"/>
+  <g fill="#5e4c37">
+    <rect x="12" y="12" width="54" height="54" rx="6"/><rect x="72" y="12" width="54" height="54" rx="6"/><rect x="132" y="12" width="54" height="54" rx="6"/><rect x="192" y="12" width="54" height="54" rx="6"/><rect x="252" y="12" width="54" height="54" rx="6"/>
+    <rect x="12" y="72" width="54" height="54" rx="6"/><rect x="72" y="72" width="54" height="54" rx="6"/><rect x="132" y="72" width="54" height="54" rx="6"/><rect x="192" y="72" width="54" height="54" rx="6"/><rect x="252" y="72" width="54" height="54" rx="6"/>
+    <rect x="12" y="132" width="54" height="54" rx="6"/><rect x="72" y="132" width="54" height="54" rx="6"/><rect x="132" y="132" width="54" height="54" rx="6"/><rect x="192" y="132" width="54" height="54" rx="6"/><rect x="252" y="132" width="54" height="54" rx="6"/>
+    <rect x="12" y="192" width="54" height="54" rx="6"/><rect x="72" y="192" width="54" height="54" rx="6"/><rect x="132" y="192" width="54" height="54" rx="6"/><rect x="192" y="192" width="54" height="54" rx="6"/><rect x="252" y="192" width="54" height="54" rx="6"/>
+    <rect x="12" y="252" width="54" height="54" rx="6"/><rect x="72" y="252" width="54" height="54" rx="6"/><rect x="132" y="252" width="54" height="54" rx="6"/><rect x="192" y="252" width="54" height="54" rx="6"/><rect x="252" y="252" width="54" height="54" rx="6"/>
+  </g>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Segoe UI', sans-serif" fill="#1c1712" text-anchor="middle" font-weight="700">
+    <g stroke="#3a2e22">
+      <rect x="12" y="12" width="54" height="54" rx="6" fill="#a9d4f5" stroke-width="1"/>
+      <rect x="132" y="12" width="54" height="54" rx="6" fill="#f7aaa2" stroke-width="2"/>
+      <rect x="72" y="72" width="54" height="54" rx="6" fill="#dde2ea" stroke-width="2"/>
+      <rect x="252" y="72" width="54" height="54" rx="6" fill="#bfe8cf" stroke-width="1"/>
+      <rect x="192" y="132" width="54" height="54" rx="6" fill="#f2a6b8" stroke-width="3"/>
+      <rect x="12" y="192" width="54" height="54" rx="6" fill="#d8c196" stroke-width="1"/>
+      <rect x="132" y="192" width="54" height="54" rx="6" fill="#f1e38e" stroke-width="2"/>
+      <rect x="252" y="252" width="54" height="54" rx="6" fill="#ebb5d8" stroke-width="4"/>
+    </g>
+    <text x="39" y="44" font-size="22">水</text><text x="39" y="60" font-size="9">물</text><text x="60" y="24" font-size="8">Ⅰ</text>
+    <text x="159" y="44" font-size="22">火</text><text x="159" y="60" font-size="9">불</text><text x="180" y="24" font-size="8">Ⅱ</text>
+    <text x="99" y="104" font-size="22">蒸</text><text x="99" y="120" font-size="9">증기</text><text x="120" y="84" font-size="8">Ⅱ</text>
+    <text x="279" y="104" font-size="22">風</text><text x="279" y="120" font-size="9">바람</text><text x="300" y="84" font-size="8">Ⅰ</text>
+    <text x="219" y="164" font-size="22">熔</text><text x="219" y="180" font-size="9">용암</text><text x="240" y="144" font-size="8">Ⅲ</text>
+    <text x="39" y="224" font-size="22">土</text><text x="39" y="240" font-size="9">흙</text><text x="60" y="204" font-size="8">Ⅰ</text>
+    <text x="159" y="224" font-size="22">雷</text><text x="159" y="240" font-size="9">번개</text><text x="180" y="204" font-size="8">Ⅱ</text>
+    <text x="279" y="284" font-size="22">賢</text><text x="279" y="300" font-size="8">현자의 돌</text><text x="300" y="264" font-size="8">Ⅳ</text>
+  </g>
+</svg>

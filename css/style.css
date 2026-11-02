@@ -332,6 +332,77 @@ a {
   text-decoration: underline;
 }
 
+.app-section {
+  margin: 48px 0 0;
+  padding: 32px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-title {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.app-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-card {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.app-card:hover {
+  border-color: var(--accent);
+}
+
+.app-card-thumb {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius);
+}
+
+.app-card-body {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.app-card-title {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.app-card:hover .app-card-title {
+  color: var(--accent);
+}
+
+.app-card-desc {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 768px) {
+  .app-card-thumb {
+    width: 96px;
+    height: 96px;
+  }
+}
+
 /* 터치 기기에서는 누르기 쉽게 영역을 넓힌다 */
 @media (pointer: coarse) {
   .chip {
