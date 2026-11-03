@@ -4,8 +4,10 @@ const BEST_KEY = 'element-alchemy:best';
 export function loadBest() {
   try {
     const raw = window.localStorage.getItem(BEST_KEY);
-    const n = Number.parseInt(raw, 10);
-    return Number.isFinite(n) && n > 0 ? n : 0;
+    // '123oops'·'1e6'처럼 전체가 10진 정수가 아닌 값은 손상으로 보고 0
+    if (typeof raw !== 'string' || !/^\d+$/.test(raw)) return 0;
+    const n = Number(raw);
+    return Number.isSafeInteger(n) && n > 0 ? n : 0;
   } catch (err) {
     return 0;
   }
