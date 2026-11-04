@@ -1,11 +1,25 @@
-// 카카오맵 표시와 길찾기 링크
+// 장소 지도와 길찾기 링크
+// 카카오 키가 있으면 카카오맵, 없거나 실패하면 키가 필요 없는 구글 지도 삽입으로 대신 보여 준다.
+
+function hasCoords(venue) {
+  return Number.isFinite(venue.lat) && Number.isFinite(venue.lng);
+}
 
 export function directionLinks(venue) {
-  const name = encodeURIComponent(venue.name);
+  const query = encodeURIComponent(venue.mapQuery || venue.name);
   return {
-    kakao: `https://map.kakao.com/link/to/${name},${venue.lat},${venue.lng}`,
-    naver: `https://map.naver.com/p/search/${encodeURIComponent(venue.address)}`,
+    // 좌표가 있으면 바로 길찾기, 없으면 장소 검색 결과로 연다
+    kakao: hasCoords(venue)
+      ? `https://map.kakao.com/link/to/${encodeURIComponent(venue.name)},${venue.lat},${venue.lng}`
+      : `https://map.kakao.com/link/search/${query}`,
+    naver: `https://map.naver.com/p/search/${query}`,
   };
+}
+
+// 키 없이 쓸 수 있는 구글 지도 삽입 주소
+export function embedMapUrl(venue) {
+  const q = hasCoords(venue) ? `${venue.lat},${venue.lng}` : (venue.mapQuery || venue.address);
+  return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=16&hl=ko&output=embed`;
 }
 
 // 카카오맵 SDK를 한 번만 불러온다. 키가 없거나 실패하면 reject.
@@ -20,7 +34,8 @@ function loadKakaoSdk(key) {
       return;
     }
     const script = document.createElement('script');
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false`;
+    // services: 좌표가 없을 때 주소로 좌표를 찾는 데 쓴다
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&libraries=services&autoload=false`;
     script.async = true;
     script.onload = () => {
       if (window.kakao && window.kakao.maps) window.kakao.maps.load(() => resolve(window.kakao));
@@ -31,17 +46,30 @@ function loadKakaoSdk(key) {
   });
 }
 
-// container: 지도를 넣을 요소, toggle: [지도 크게 보기] 버튼
-// 성공하면 true, 실패하면 false (호출한 쪽이 대체 화면을 보여 준다)
+function geocode(kakao, address) {
+  return new Promise((resolve, reject) => {
+    new kakao.maps.services.Geocoder().addressSearch(address, (result, status) => {
+      if (status === kakao.maps.services.Status.OK && result[0]) {
+        resolve(new kakao.maps.LatLng(Number(result[0].y), Number(result[0].x)));
+      } else {
+        reject(new Error('주소로 위치를 찾지 못했습니다'));
+      }
+    });
+  });
+}
+
+// container: 지도를 넣을 요소, toggle: [지도 움직이기] 버튼
+// 카카오맵을 띄우면 true, 실패하면 false (호출한 쪽이 구글 지도로 대신한다)
 export async function initMap(container, toggle, venue, key) {
   let kakao;
+  let center;
   try {
     kakao = await loadKakaoSdk(key);
+    center = hasCoords(venue) ? new kakao.maps.LatLng(venue.lat, venue.lng) : await geocode(kakao, venue.address);
   } catch {
     return false;
   }
 
-  const center = new kakao.maps.LatLng(venue.lat, venue.lng);
   // 페이지를 넘길 때 지도가 손가락을 잡지 않도록 처음에는 고정
   const map = new kakao.maps.Map(container, { center, level: 4, draggable: false, scrollwheel: false, disableDoubleClickZoom: true });
   map.setZoomable(false);

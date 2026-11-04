@@ -2,7 +2,7 @@
 
 import { CONFIG } from './config.js';
 import { getDday, ddayLabel, kstParts, monthGrid, WEEKDAYS, formatEventDate } from './dday.js';
-import { directionLinks, initMap } from './map.js';
+import { directionLinks, embedMapUrl, initMap } from './map.js';
 
 const eventDate = new Date(CONFIG.eventDate);
 const $ = (sel) => document.querySelector(sel);
@@ -121,7 +121,14 @@ async function setupMap() {
 
   const ok = await initMap($('[data-map]'), $('[data-map-toggle]'), CONFIG.venue, CONFIG.kakaoJsKey);
   if (!ok) {
+    // 카카오 키가 없거나 실패: 키가 필요 없는 구글 지도를 넣는다
     $('[data-map]').hidden = true;
+    const frame = el('iframe', 'map-embed');
+    frame.src = embedMapUrl(CONFIG.venue);
+    frame.title = `${CONFIG.venue.name} 위치 지도`;
+    frame.loading = 'lazy';
+    frame.referrerPolicy = 'no-referrer-when-downgrade';
+    $('[data-map-fallback]').replaceChildren(frame);
     $('[data-map-fallback]').hidden = false;
   }
 }
